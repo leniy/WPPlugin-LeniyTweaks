@@ -6,14 +6,14 @@
 if (!function_exists('leniy_local_avatar')) {
 	function leniy_local_avatar( $email, $size = '32', $default = '', $alt = '') {
 		$f = md5( strtolower( $email ) );
-		$a = LENIY_PLUGIN_URL . 'avatar/' . $f . $size . '.png';
-		$e = LENIY_PLUGIN_DIR . 'avatar/' . $f . $size . '.png';
-		$d = LENIY_PLUGIN_DIR . 'avatar/' . $f . '-d.png';
-	
-		if($default=='')
-			$default = LENIY_PLUGIN_URL . 'avatar/default.png';
+		$a = LENIY_PLUGIN_URL . 'leniy_local_avatar/cache/' . $f . $size . '.png';
+		$e = LENIY_PLUGIN_DIR . 'leniy_local_avatar/cache/' . $f . $size . '.png';
+		$d = LENIY_PLUGIN_DIR . 'leniy_local_avatar/cache/' . $f . '-d.png';
 
-		$t = 2592000; // 缓存有效期30天, 这里单位:秒
+		if($default=='')
+			$default = LENIY_PLUGIN_URL . 'leniy_local_avatar/default.png';
+
+		$t = 604800; // 缓存有效期7天, 这里单位:秒
 		if ( !is_file($e) || (time() - filemtime($e)) > $t ) {
 			if ( !is_file($d) || (time() - filemtime($d)) > $t ) {
 				// 验证是否有头像
@@ -23,7 +23,7 @@ if (!function_exists('leniy_local_avatar')) {
 					// 没有头像，则新建一个空白文件作为标记
 					$handle = fopen($d, 'w');
 					fclose($handle);
-	
+
 					$a = $default;
 				}
 				else {
@@ -37,7 +37,7 @@ if (!function_exists('leniy_local_avatar')) {
 				$a = $default;
 			}
 		}
-	
+
 		$avatar = "<img alt='{$alt}' src='{$a}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
 		return apply_filters('leniy_local_avatar', $avatar, $email, $size, $default, $alt);
 	}

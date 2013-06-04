@@ -1,6 +1,9 @@
 <?php
 
 //博客统计状态
+//访客数量需要WP-PostViews插件支持
+//建站日期手动输入
+
 if (!function_exists('leniy_blogstat')) {
 	function leniy_blogstat() {
 		global $wpdb;

@@ -1,6 +1,9 @@
 <?php
 
 //回复可见
+//使用短代码：
+//[replyview notice="提示信息"]这儿是隐藏内容[/replyview]
+
 if (!function_exists('leniy_replyview')) {
 	function leniy_replyview($atts,$content=null){
 		extract(shortcode_atts(array("notice" => '请勿发送垃圾评论及无意义评论，此类评论自动删除'),$atts));
