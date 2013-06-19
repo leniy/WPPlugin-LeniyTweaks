@@ -1,46 +1,32 @@
 <?php
 
 //服务器本地缓存Avatar头像
-//主题文件中使用get_avatar( $comment的部分，需要修改为leniy_local_avatar( $comment->comment_author_email
+//不必修改主题文件
 
 if (!function_exists('leniy_local_avatar')) {
-	function leniy_local_avatar( $email, $size = '32', $default = '', $alt = '') {
-		$f = md5( strtolower( $email ) );
-		$a = LENIY_PLUGIN_URL . 'leniy_local_avatar/cache/' . $f . $size . '.png';
-		$e = LENIY_PLUGIN_DIR . 'leniy_local_avatar/cache/' . $f . $size . '.png';
-		$d = LENIY_PLUGIN_DIR . 'leniy_local_avatar/cache/' . $f . '-d.png';
+	function leniy_local_avatar( $source ) {
+		//$source为wp函数get_avatar返回的html元素，其中图片地址类似：http://1.gravatar.com/avatar/邮箱md5值?s=图片尺寸&d=wavatar&r=G
+		$time = 604800; // 缓存有效期7天, 这里单位:秒
+		preg_match('/avatar\/([a-z0-9]+)\?s=(\d+)/',$source,$tmp);
+		//$tmp[1]为md5值，$tmp[2]为图片尺寸（单位为px）
+		$cache_dir = LENIY_PLUGIN_DIR . 'leniy_local_avatar/cache/' . $tmp[1] . $tmp[2] . '.png';
+		$cache_url = LENIY_PLUGIN_URL . 'leniy_local_avatar/cache/' . $tmp[1] . $tmp[2] . '.png';
+		$default   = LENIY_PLUGIN_URL . 'leniy_local_avatar/default.png';
 
-		if($default=='')
-			$default = LENIY_PLUGIN_URL . 'leniy_local_avatar/default.png';
 
-		$t = 604800; // 缓存有效期7天, 这里单位:秒
-		if ( !is_file($e) || (time() - filemtime($e)) > $t ) {
-			if ( !is_file($d) || (time() - filemtime($d)) > $t ) {
-				// 验证是否有头像
-				$uri = 'http://www.gravatar.com/avatar/' . $f . '?d=404';
-				$headers = @get_headers($uri);
-				if (!preg_match("|200|", $headers[0])) {
-					// 没有头像，则新建一个空白文件作为标记
-					$handle = fopen($d, 'w');
-					fclose($handle);
-
-					$a = $default;
-				}
-				else {
-					// 有头像且不存在则更新
-					$r = get_option('avatar_rating');
-					$g = 'http://www.gravatar.com/avatar/'. $f. '?s='. $size. '&r=' . $r;
-					copy($g, $e);
-				}
-			}
-			else {
-				$a = $default;
-			}
+		if ( !is_file($cache_dir) || (time() - filemtime($cache_dir)) > $time ) {
+			//如果缓存文件不存在或超时，则更新缓存到$cache_dir文件
+			copy( 'http://www.gravatar.com/avatar/' . $tmp[1] . '?s=' . $tmp[2] . '&d=' . $default . '&r=' . get_option('avatar_rating') , $cache_dir );
 		}
-
-		$avatar = "<img alt='{$alt}' src='{$a}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
-		return apply_filters('leniy_local_avatar', $avatar, $email, $size, $default, $alt);
+		if (filesize($cache_dir)<500) {
+			//缓存文件小于500字节，说明头像不存在，则返回默认图片
+			$returnimg = $default;
+		}else {
+			$returnimg = $cache_url;
+		}
+		return '<img alt="" src="' . $returnimg . '" class="avatar avatar-' . $tmp[2] . ' photo" width="' . $tmp[2] . '" height="' . $tmp[2] . '" />';
 	}
 }
+add_filter('get_avatar','leniy_local_avatar');
 
 ?>
