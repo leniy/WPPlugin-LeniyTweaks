@@ -18,8 +18,8 @@ if (!function_exists('leniy_local_avatar')) {
 			//如果缓存文件不存在或超时，则更新缓存到$cache_dir文件
 			copy( 'http://www.gravatar.com/avatar/' . $tmp[1] . '?s=' . $tmp[2] . '&d=' . $default . '&r=' . get_option('avatar_rating') , $cache_dir );
 		}
-		if (filesize($cache_dir)<500) {
-			//缓存文件小于500字节，说明头像不存在，则返回默认图片
+		if (filesize($cache_dir)<10) {
+			//缓存文件小于10字节，说明头像不存在，则返回默认图片
 			$returnimg = $default;
 		}else {
 			$returnimg = $cache_url;
