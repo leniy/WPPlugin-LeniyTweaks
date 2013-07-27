@@ -18,7 +18,7 @@ if (!function_exists('leniy_widget_blogstat')) {
 //注册小工具
 wp_register_sidebar_widget(
 	'leniy_widget_blogstat',   // 本小工具的独立ID
-	'博客状态统计',                     // 小工具名称
+	'博客统计状态(Leniy)',                     // 小工具名称
 	'leniy_widget_blogstat',   // callback调用的函数名
 	array(                          // 选项
 		'description' => '显示wordpress基本状态统计信息'
