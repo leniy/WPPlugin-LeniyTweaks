@@ -3,7 +3,7 @@
 	Plugin Name: Leniy Tweaks
 	Plugin URI: http://blog.leniy.org/leniy-tweaks.html
 	Description: 为中国大陆用户设计的wordpress小工具，适合中文用户习惯
-	Version: 0.2.1
+	Version: 0.2.2
 	Author: leniy
 	Author URI: http://blog.leniy.org/
 	Text Domain: leniylang
