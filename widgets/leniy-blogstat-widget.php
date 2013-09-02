@@ -8,8 +8,7 @@ class Leniy_Blogstat_Widget extends WP_Widget {
 
 	function Leniy_Blogstat_Widget() {
 		$widget_ops = array( 'classname' => 'leniy_widget_blogstat', 'description' => __( "显示wordpress基本状态统计信息", 'leniytweaks' ) );
-		$control_ops = array( 'width' => 400 );
-		$this->WP_Widget( 'leniy_widget_blogstat', __( '博客统计状态 (Leniy)', 'leniytweaks' ), $widget_ops, $control_ops );
+		$this->WP_Widget( 'leniy_widget_blogstat', __( '博客统计状态 (Leniy)', 'leniytweaks' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -61,7 +60,7 @@ class Leniy_Blogstat_Widget extends WP_Widget {
 
 	function form( $instance ) {
 		// Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => __('博客统计', 'leniytweaks') ) );
 
 		$title      = esc_attr( $instance['title'] );
 
