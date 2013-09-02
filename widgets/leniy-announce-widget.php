@@ -23,7 +23,7 @@ class Leniy_Announce_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . esc_html( $title ) . $after_title;
 
-		$show_pageid  = absint( $instance['page_id'] );   //post或page页面的id
+		$show_pageid  = absint( $instance['show_pageid'] );   //post或page页面的id
 		$show_num     = absint( $instance['show_num'] );  //公告显示条数
 		$output = '';
 		$comments = get_comments("number=" . $show_num . "&post_id=" . $show_pageid);
