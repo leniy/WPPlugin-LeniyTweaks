@@ -39,7 +39,14 @@ class Leniy_Blogstat_Widget extends WP_Widget {
 		$output .= '<li>评论总数：' . $count_comments        . ' 条</li>';
 		$output .= '<li>标签数量：' . $count_tags            . ' 个</li>';
 		$output .= '<li>建站日期：' . $begin                             ;
-		$output .= '<li>运行天数：' . $rundays               . ' 天</li>';
+		$output .= '<li>运行天数：';
+			$rundays_year =  floor( $rundays/365 );
+			$rundays_month = floor( ($rundays - $rundays_year * 365)/30 );
+			$rundays_day =   $rundays - $rundays_year * 365 - $rundays_month * 30;
+			if($rundays_year  > 0) $output .= $rundays_year  . ' 年 ';
+			if($rundays_month > 0) $output .= $rundays_month . ' 个月 ';
+			if($rundays_day   > 0) $output .= $rundays_day   . ' 天 ';
+			$output .= '</li>';
 		$output .= '<li>最后更新：' . $last                              ;
 		$output .= '<li>访客数量：' . $count_views         . ' 人次</li>';
 
