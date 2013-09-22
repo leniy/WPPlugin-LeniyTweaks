@@ -48,7 +48,7 @@ class Leniy_Blogstat_Widget extends WP_Widget {
 			if($rundays_day   > 0) $output .= $rundays_day   . ' 天 ';
 			$output .= '</li>';
 		$output .= '<li>最后更新：' . $last                              ;
-		$output .= '<li>访客数量：' . $count_views         . ' 人次</li>';
+		if($count_views > 0) $output .= '<li>访客数量：' . $count_views         . ' 人次</li>';
 
 		$output = '<ul>' . $output . '</ul>';
 		$output = '<div class="leniy-blogstat-container">' . $output . '</div>';
