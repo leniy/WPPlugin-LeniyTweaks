@@ -21,11 +21,11 @@ class Leniy_Socialbox_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . esc_html( $title ) . $after_title;
 
-		$url_rss       = $instance['surl_rss'];
-		$url_blog      = $instance['surl_blog'];
-		$url_qqweibo   = $instance['surl_qqweibo'];
-		$url_sinaweibo = $instance['surl_sinaweibo'];
-		$url_email     = $instance['surl_email'];
+		$url_rss       = $instance['url_rss'];
+		$url_blog      = $instance['url_blog'];
+		$url_qqweibo   = $instance['url_qqweibo'];
+		$url_sinaweibo = $instance['url_sinaweibo'];
+		$url_email     = $instance['url_email'];
 
 		$output = '';
 		$output .= '<a rel="external nofollow" target="_blank" class="sb-rss"       href="' . $url_rss       . '">RSS Feed</a>';
