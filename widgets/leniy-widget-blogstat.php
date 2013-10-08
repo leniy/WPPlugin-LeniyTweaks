@@ -31,7 +31,7 @@ class Leniy_Blogstat_Widget extends WP_Widget {
 		$rundays = floor((time()-strtotime($begin))/86400);/*运行天数*/
 		$last = $wpdb->get_results("SELECT MAX(post_modified) AS MAX_m FROM $wpdb->posts WHERE (post_type = 'post' OR post_type = 'page') AND (post_status = 'publish' OR post_status = 'private')");
 		$last = date('Y-m-d', strtotime($last[0]->MAX_m));/*最后更新*/
-		$qw_views = $wpdb->get_results("SELECT sum(meta_value) AS qwviews FROM yg3jg5_postmeta WHERE meta_key LIKE 'views'");
+		$qw_views = $wpdb->get_results("SELECT sum(meta_value) AS qwviews FROM $wpdb->postmeta WHERE meta_key LIKE 'views'");
 		$count_views = $qw_views[0]->qwviews;/*访客数量*/
 
 		$output = '';
