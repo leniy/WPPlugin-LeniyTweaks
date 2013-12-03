@@ -28,11 +28,11 @@ class Leniy_Socialbox_Widget extends WP_Widget {
 		$url_email     = $instance['url_email'];
 
 		$output = '';
-		$output .= '<a rel="external nofollow" target="_blank" class="sb-rss"       href="' . $url_rss       . '">RSS Feed</a>';
-		$output .= '<a rel="external nofollow" target="_blank" class="sb-blog"      href="' . $url_blog      . '">Leniy</a>';
-		$output .= '<a rel="external nofollow" target="_blank" class="sb-qqweibo"   href="' . $url_qqweibo   . '">腾讯微博@leniytsan</a>';
-		$output .= '<a rel="external nofollow" target="_blank" class="sb-sinaweibo" href="' . $url_sinaweibo . '">新浪微博@leniycc</a>';
-		$output .= '<a rel="external nofollow" target="_blank" class="sb-email"     href="mailto:' . $url_email     . '">Email</a>';
+		$output .= '<a rel="external nofollow" target="_blank" class="socialbox socialbox-rss"       href="' . $url_rss       . '">RSS Feed</a>';
+		$output .= '<a rel="external nofollow" target="_blank" class="socialbox socialbox-blog"      href="' . $url_blog      . '">Leniy</a>';
+		$output .= '<a rel="external nofollow" target="_blank" class="socialbox socialbox-qqweibo"   href="' . $url_qqweibo   . '">腾讯微博@leniytsan</a>';
+		$output .= '<a rel="external nofollow" target="_blank" class="socialbox socialbox-sinaweibo" href="' . $url_sinaweibo . '">新浪微博@leniycc</a>';
+		$output .= '<a rel="external nofollow" target="_blank" class="socialbox socialbox-email"     href="mailto:' . $url_email     . '">Email</a>';
 
 		$output = '<div class="leniy-socialbox-container">' . $output . '</div>';
 		echo $output;
@@ -45,21 +45,24 @@ class Leniy_Socialbox_Widget extends WP_Widget {
 }
 .leniy-socialbox-container a {
 	float:left;
-	width:54px;
-	height:54px;
 	margin:0 6px;
 	padding:0;
 	text-indent:-9999em;
-	background-color:transparent;
-	background-size:100% auto;
-	background-repeat:no-repeat;
 }
-.leniy-socialbox-container .sb-blog      {background-image:url(' . plugins_url( 'socialboximg/socialbox.leniy.png' , __FILE__ ) . ');}
-.leniy-socialbox-container .sb-rss       {background-image:url(' . plugins_url( 'socialboximg/socialbox.rss.png' , __FILE__ ) . ');}
-.leniy-socialbox-container .sb-sinaweibo {background-image:url(' . plugins_url( 'socialboximg/socialbox.sinaweibo.png' , __FILE__ ) . ');}
-.leniy-socialbox-container .sb-qqweibo   {background-image:url(' . plugins_url( 'socialboximg/socialbox.qqweibo.png' , __FILE__ ) . ');}
-.leniy-socialbox-container .sb-email     {background-image:url(' . plugins_url( 'socialboximg/socialbox.email.png' , __FILE__ ) . ');}
-.leniy-socialbox-container .sb-qq        {background-image:url(' . plugins_url( 'socialboximg/socialbox.qq.png' , __FILE__ ) . ');}
+.socialbox {
+	background-image: url(' . plugins_url( 'socialboximg/socialbox.png' , __FILE__ ) . ');
+	background-repeat: no-repeat;
+	display: block;
+	width: 54px;
+	height: 54px;
+}
+.socialbox-email     {background-position: -6px -6px;}
+.socialbox-blog      {background-position: -72px -6px;}
+.socialbox-qq        {background-position: -6px -72px;}
+.socialbox-qqweibo   {background-position: -72px -72px;}
+.socialbox-rss       {background-position: -138px -6px;}
+.socialbox-sinaweibo {background-position: -138px -72px;}
+.socialbox-weixin    {background-position: -6px -138px;}
 </style>
 ';
 		echo "\n" . $after_widget;
