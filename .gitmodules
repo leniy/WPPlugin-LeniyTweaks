@@ -1,0 +1,3 @@
+[submodule "leniy-tweaks/inc"]
+	path = leniy-tweaks/inc
+	url = git@github.com:leniy/WPPlugin-LeniyInc.git
